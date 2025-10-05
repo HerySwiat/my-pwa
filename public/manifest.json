@@ -1,0 +1,33 @@
+{
+  "short_name": "HerySwiat",
+  "name": "Mi PWA - Punto de Venta by L.H.H.A.",
+  "description": "Aplicación progresiva para gestión de ventas y reparaciones",
+  "icons": [
+    {
+      "src": "/icons/logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/logo-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["fullscreen", "standalone"],
+  "background_color": "#371809",
+  "theme_color": "#895330",
+  "orientation": "portrait-primary",
+  "lang": "es-MX"
+}
