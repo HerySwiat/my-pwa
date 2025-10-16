@@ -1,12 +1,22 @@
-// src/components/NotificationTester.tsx
 import { useState } from "react";
+import "./NotificationTester.css"; // ✅ Importar CSS
 
 export default function NotificationTester() {
-  const [permission, setPermission] = useState(Notification.permission);
-  const [status, setStatus] = useState("");
-
-  // 📜 Verifica compatibilidad
+  // 🧱 Verificar soporte antes de acceder a Notification
   const isSupported = "Notification" in window && "serviceWorker" in navigator;
+
+  // ✅ Protección: solo usar Notification.permission si existe
+  let initialPermission = "unsupported";
+  try {
+    if (isSupported) {
+      initialPermission = Notification.permission;
+    }
+  } catch (err) {
+    console.warn("⚠️ No se pudo acceder a Notification.permission:", err);
+  }
+
+  const [permission, setPermission] = useState(initialPermission);
+  const [status, setStatus] = useState("");
 
   const requestPermission = async () => {
     if (!isSupported) {
@@ -19,8 +29,10 @@ export default function NotificationTester() {
       setPermission(result);
       if (result === "granted") {
         alert("✅ Permiso de notificaciones concedido");
+      } else if (result === "denied") {
+        alert("🚫 Permiso de notificaciones denegado");
       } else {
-        alert("🚫 Permiso denegado o no seleccionado");
+        alert("ℹ️ Permiso de notificaciones no seleccionado");
       }
     } catch (err) {
       console.error("❌ Error al pedir permiso:", err);
@@ -28,8 +40,12 @@ export default function NotificationTester() {
     }
   };
 
-  // 🔔 Notificación local (sin pasar por el SW)
   const sendLocalNotification = async () => {
+    if (!isSupported) {
+      alert("🚫 Tu navegador no soporta notificaciones.");
+      return;
+    }
+
     if (permission !== "granted") {
       alert("⚠️ Primero concede permiso para notificaciones.");
       return;
@@ -47,8 +63,12 @@ export default function NotificationTester() {
     }
   };
 
-  // 📦 Notificación simulada vía Service Worker
   const sendSWNotification = async () => {
+    if (!isSupported) {
+      alert("🚫 Tu navegador no soporta Service Workers.");
+      return;
+    }
+
     if (permission !== "granted") {
       alert("⚠️ Primero concede permiso para notificaciones.");
       return;
@@ -58,7 +78,6 @@ export default function NotificationTester() {
       const reg = await navigator.serviceWorker.ready;
 
       if (reg.active) {
-        // 📨 Enviar mensaje al SW para simular push
         reg.active.postMessage({
           type: "FAKE_PUSH",
           title: "🚀 Notificación desde Service Worker",
@@ -75,28 +94,36 @@ export default function NotificationTester() {
   };
 
   return (
-    <div style={{ padding: "1rem", textAlign: "center" }}>
+    <div className="notification-tester">
       <h3>🔔 Prueba de Notificaciones</h3>
 
       {!isSupported ? (
-        <p style={{ color: "red" }}>
+        <p className="support-warning">
           🚫 Tu navegador no soporta Notificaciones o Service Workers.
         </p>
       ) : (
         <>
-          <p>Estado del permiso: <strong>{permission}</strong></p>
+          <p className="permission-status">
+            Estado del permiso: <strong>{permission}</strong>
+          </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          <div className="notification-buttons">
             <button onClick={requestPermission}>Pedir permiso</button>
-            <button onClick={sendLocalNotification} disabled={permission !== "granted"}>
+            <button
+              onClick={sendLocalNotification}
+              disabled={permission !== "granted"}
+            >
               🔹 Enviar notificación local
             </button>
-            <button onClick={sendSWNotification} disabled={permission !== "granted"}>
+            <button
+              onClick={sendSWNotification}
+              disabled={permission !== "granted"}
+            >
               🔸 Enviar notificación vía Service Worker
             </button>
           </div>
 
-          {status && <p style={{ marginTop: "1rem", color: "#333" }}>{status}</p>}
+          {status && <p className="notification-status">{status}</p>}
         </>
       )}
     </div>

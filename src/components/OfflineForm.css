@@ -1,0 +1,147 @@
+/* src/components/OfflineForm.css */
+.offline-form-container {
+  padding: 3rem 2rem;
+  background: linear-gradient(180deg, #683217 0%, #371809 100%);
+  border-top: 1px solid #a68575;
+  border-bottom: 1px solid #a68575;
+  position: relative;
+}
+
+.offline-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a68575, transparent);
+}
+
+.offline-form-container h2 {
+  color: #af9a94;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  position: relative;
+}
+
+.offline-form-container h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 40%;
+  width: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a68575, transparent);
+}
+
+.offline-form-container form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.offline-form-container input {
+  background: rgba(166, 133, 117, 0.1);
+  border: 1px solid #a68575;
+  color: #af9a94;
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  min-width: 250px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.offline-form-container input::placeholder {
+  color: #a68575;
+  font-style: italic;
+}
+
+.offline-form-container input:focus {
+  outline: none;
+  border-color: #af9a94;
+  background: rgba(166, 133, 117, 0.2);
+  box-shadow: 0 0 8px rgba(166, 133, 117, 0.3);
+}
+
+.offline-form-container button {
+  background: linear-gradient(135deg, #895330, #683217);
+  color: #af9a94;
+  border: 1px solid #a68575;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2px;
+  font-size: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.offline-form-container button:hover {
+  background: linear-gradient(135deg, #683217, #895330);
+  color: #fff;
+  border-color: #af9a94;
+  transform: translateY(-1px);
+}
+
+.status-online {
+  color: #a68575;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.status-offline {
+  color: #895330;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.entries-list {
+  list-style: none;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.entries-list li {
+  background: rgba(55, 24, 9, 0.5);
+  border: 1px solid #683217;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry-text {
+  color: #af9a94;
+}
+
+.entry-status {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .offline-form-container {
+    padding: 2rem 1rem;
+  }
+  
+  .offline-form-container form {
+    flex-direction: column;
+  }
+  
+  .offline-form-container input {
+    min-width: 100%;
+    max-width: 300px;
+  }
+  
+  .offline-form-container button {
+    width: 100%;
+    max-width: 300px;
+  }
+}

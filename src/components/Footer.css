@@ -1,0 +1,45 @@
+/* src/components/Footer.css */
+.footer {
+  background-color: #371809;
+  color: #a68575;
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid #683217;
+  font-style: italic;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a68575, transparent);
+}
+
+.footer-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-signature {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  color: #af9a94;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}

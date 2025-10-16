@@ -25,14 +25,3 @@ export default function App() {
 
   return <HomeScreen />;
 }
-// 🔧 Registrar el Service Worker (solo una vez)
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", async () => {
-    try {
-      const reg = await navigator.serviceWorker.register("/sw.js");
-      console.log("✅ Service Worker registrado:", reg);
-    } catch (err) {
-      console.error("❌ Error al registrar el Service Worker:", err);
-    }
-  });
-}
