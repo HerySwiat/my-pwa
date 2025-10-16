@@ -100,3 +100,23 @@ self.addEventListener("notificationclick", (event) => {
 self.addEventListener("notificationclose", (event) => {
   console.log("❌ NOTIFICACIÓN CERRADA POR EL USUARIO");
 });
+
+// En tu sw.js - agrega esto:
+self.addEventListener("message", (event) => {
+  console.log("📩 Mensaje recibido en SW:", event.data);
+
+  if (event.data && event.data.type === "SHOW_NOTIFICATION") {
+    const { title, body } = event.data;
+    
+    event.waitUntil(
+      self.registration.showNotification(title, {
+        body: body,
+        icon: "/vite.svg",
+        badge: "/vite.svg",
+        tag: "message-notification",
+        requireInteraction: true,
+        vibrate: [200, 100, 200]
+      })
+    );
+  }
+});
