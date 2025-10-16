@@ -25,7 +25,8 @@ const baseProducts = [
 ];
 
 // Repite los productos 3 veces
-const products = Array.from({ length: 14 })
+const products = Array.from({ length: 1
+ })
   .flatMap((_, i) =>
     baseProducts.map((p) => ({
       ...p,
