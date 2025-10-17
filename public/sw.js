@@ -28,47 +28,32 @@ self.addEventListener("message", async (event) => {
     const { title, body } = event.data;
 
     try {
-      console.log("🔄 Intentando mostrar notificación local...");
+      console.log("🔄 Mostrando notificación...");
 
-      // Verificar si tenemos permisos
-      const permission = await self.registration.permission;
-      console.log("🔐 Permiso del SW:", permission);
-
-      // Mostrar notificación con más opciones
       await self.registration.showNotification(
         title || "🔔 Notificación Local",
         {
           body: body || "Esta es una notificación local de prueba",
-          icon: "/icons/icon-192x192.png",
-          badge: "/icons/icon-72x72.png",
+          icon: "/icons/logo-192.png",
+          badge: "/icons/logo-192.png",
           vibrate: [200, 100, 200],
           tag: "local-notification-" + Date.now(),
-          requireInteraction: true, // 🔥 MANTIENE la notificación hasta que el usuario la cierre
-          silent: false, // 🔥 ASEGURA que no sea silenciosa
+          requireInteraction: true,
           actions: [
-            {
-              action: "open",
-              title: "📱 Abrir app"
-            },
-            {
-              action: "close",
-              title: "❌ Cerrar"
-            }
-          ]
+            { action: "open", title: "📱 Abrir app" },
+            { action: "close", title: "❌ Cerrar" },
+          ],
         }
       );
 
-      console.log("✅ Notificación local mostrada exitosamente");
+      console.log("✅ Notificación mostrada correctamente");
 
     } catch (error) {
       console.error("❌ Error mostrando notificación:", error);
-      console.error("🔍 Detalles del error:", error.message, error.name);
-
-      // Intentar con una versión más simple
       try {
-        await self.registration.showNotification("Notificación de prueba", {
+        await self.registration.showNotification("Notificación simple", {
           body: "Versión simplificada",
-          icon: "/vite.svg" // Usar un ícono que seguro existe
+          icon: "/icons/logo-192.png",
         });
         console.log("✅ Notificación simplificada mostrada");
       } catch (simpleError) {
@@ -77,6 +62,7 @@ self.addEventListener("message", async (event) => {
     }
   }
 });
+
 
 // Manejo de clics en notificación (mejorado)
 // En tu sw.js - agrega esto para ver si las notificaciones se están mostrando:
@@ -111,8 +97,8 @@ self.addEventListener("message", (event) => {
     event.waitUntil(
       self.registration.showNotification(title, {
         body: body,
-        icon: "/vite.svg",
-        badge: "/vite.svg",
+        icon: "/icons/logo-192.png",
+        badge: "/icons/logo-192.png",
         tag: "message-notification",
         requireInteraction: true,
         vibrate: [200, 100, 200]
