@@ -22,8 +22,8 @@
       "purpose": "any"
     }
   ],
-  "start_url": ".",
-  "scope": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "display_override": ["fullscreen", "standalone"],
   "background_color": "#371809",
